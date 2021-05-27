@@ -39,10 +39,12 @@ export function RepositoryList() {
     <section className="repository-list">
       <h1>Repositories</h1>
       <ul>
-        {repositories.map(repository => <RepositoryItem
-          key={repository.id}
-          repository={repository}
-        />)}
+        {repositories.map(repository =>
+          <RepositoryItem
+            key={repository.id}
+            repository={repository}
+          />
+        )}
       </ul>
       <button type="button" onClick={AddNewProject}>
         Add New Project
