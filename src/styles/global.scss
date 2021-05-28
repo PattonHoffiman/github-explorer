@@ -3,11 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 } body {
-  width: 100vw;
-  height: 100vh;
+  color: #383B73;
+  background: #0D0E26;
+  font: 16px 'Roboto Slab', serif;
 
-  color: #121214;
-  font: 16px "Helvetica Neue", Arial, sans-serif;
+  main {
+    display: flex;
+    flex-direction: row;
+  }
 
   button {
     cursor: pointer;
