@@ -1,42 +1,20 @@
 import './style.scss';
-
-import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
-
+import { useState, useEffect } from 'react';
 import { RepositoryItem } from './RepositoryItem';
 
+export function RepositoryList(props) {  
+  const [repositories, setRepositories] = useState([]);
 
-export function RepositoryList() {
-  const [repositories, setRepositories] = useState([
-    {
-      id: uuid(),
-      name: 'Back-End Template',
-      description: 'A Template for Back-End using Node.js',
-      link: 'https://github.com/PattonHoffiman/back-end-template'
-    },
-    {
-      id: uuid(),
-      name: 'GreenHouse Back-End',
-      description: 'The Back-End of project GreenHouse',
-      link: 'https://github.com/PattonHoffiman/green-house-back-end'
-    },
-    {
-      id: uuid(),
-      name: 'GreenHouse Front-End',
-      description: 'The Front-End of project GreenHouse',
-      link: 'https://github.com/PattonHoffiman/green-house-front-end'
-    }
-  ]);
+  useEffect(() => {
+    fetch('https://api.github.com/users/pattonhoffiman/repos')
+    .then(res => res.json())
+    .then(data => setRepositories(data));
+  }, []);
 
-  function AddNewProject() {
-    const repository = {
-      id: uuid(),
-      name: 'Project',
-      description: 'Description...',
-      link: null
-    }
-
-    setRepositories([...repositories, repository]);
+  function getRepositoryData(repository) {
+    fetch(`https://api.github.com/repos/pattonhoffiman/${repository.name}`)
+    .then(res => res.json())
+    .then(data => props.getData(data));
   }
   
   return (
@@ -48,14 +26,10 @@ export function RepositoryList() {
             <RepositoryItem
               key={repository.id}
               repository={repository}
+              buttonAction={getRepositoryData}
             />
           )}
         </ul>
-        <div className="button-area">
-          <button type="button" onClick={AddNewProject}>
-            Add New Project
-          </button>
-        </div>
       </div>
     </aside>
   );
