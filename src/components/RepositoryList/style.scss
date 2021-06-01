@@ -57,37 +57,7 @@ aside.repository-list {
     }
       
     ul {
-      list-style: none;      
-    }
-  
-    div.button-area {
-      width: 100%;      
-      padding-bottom: 1.5rem;      
-
-      display: flex;      
-      justify-content: center;
-      
-      button {
-        width: 200px;
-        padding: 1rem;        
-        margin-top: 1.2rem;
-
-        border: none;
-        opacity: 0.7;
-        color: #fafafa;
-        background: #0D0E26;
-        border-radius: 10px;
-        box-shadow: 2px 2px 2px rgba(0,0,0,.5);
-    
-        font-weight: 500;
-        text-transform: uppercase;
-    
-        transition: .3s ease-in;
-    
-        &:hover {      
-          opacity: 1;
-        }
-      }
+      list-style: none;
     }
   }
 }
