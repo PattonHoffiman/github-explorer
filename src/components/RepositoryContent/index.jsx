@@ -1,46 +1,40 @@
 import './style.scss';
 import { useState, useEffect } from 'react';
+import { DateContainer } from '../DateContainer';
+import formatJSON from '../../utils/format/formatJSON';
 
 export function RepositoryContent(props) {
-  const [techs, setTechs] = useState({});
+  const repository = props.injectData();
   
-  function convertDate(date) {
-    if(date) {
-      const onlyDate = date.substring(0,10);
-      const [year, month, day] = onlyDate.split('-');
-      return `${day}-${month}-${year}`;
-    }
+  const dates = {
+    created_at: repository.created_at,
+    updated_at: repository.updated_at
   }
 
+  const [techs, setTechs] = useState([]);
+  
   function getLanguageURL() {
-    const url = props.injectData().languages_url;
+    const url = repository.languages_url;
     
     if(url) {
       fetch(url)
       .then(res => res.json())
       .then(data => {
-        setTechs(data);
-        console.log(data);
+        const languages = formatJSON(JSON.stringify(data));
+        setTechs(languages);
       });
     }
   }
   
   useEffect(() => {
-    getLanguageURL();    
-  }, [props.injectData().name]);
+    getLanguageURL();
+  }, [repository.name]);
 
   return (
     <section>
-      <h1>{props.injectData().name}</h1>
-      <p>{props.injectData().description}</p>
-      <div className="date-container">
-        <span>
-          <span>Created At:</span> {convertDate(props.injectData().created_at)}
-        </span>
-        <span>
-          <span>Updated At:</span> {convertDate(props.injectData().updated_at)}
-        </span>
-      </div>
+      <h1>{repository.name}</h1>
+      <p>{repository.description}</p>
+      {repository.created_at && <DateContainer dates={dates}/>}      
     </section>
   );
 }
