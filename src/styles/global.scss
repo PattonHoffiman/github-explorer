@@ -3,13 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 } body {
-  color: #383B73;
-  background: #0D0E26;
+  color: #f2f2f2;
+  background: #021526;
   font: 16px 'Roboto Slab', serif;
 
   main {
     display: flex;
     flex-direction: row;
+    
+    overflow: hidden;    
   }
 
   button {
