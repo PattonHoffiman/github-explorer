@@ -1,13 +1,13 @@
 import './style.scss';
 
-export function RepositoryItem(props) {
+export default function RepositoryItem(props) {  
   return (
     <div className="init-animation">
       <button
         type="button"
         onClick={() => props.buttonAction(props.repository)}
       >
-        {props.repository.name}
+        {props.repository}
       </button>
     </div>
   );
