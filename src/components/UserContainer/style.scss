@@ -1,0 +1,19 @@
+@keyframes MoveUser {
+  from {    
+    transform: translateX(-2%);
+  } to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+section.user-container {
+  width: 100%;
+  background: #03658C;
+  
+  div {
+    opacity: 0;
+    animation: MoveUser 1s ease-out forwards;
+    animation-delay: .1s;
+  }
+}
