@@ -14,33 +14,23 @@ export default function RepositoryContainer(props) {
     created_at: formatDate(repository.created_at),
     updated_at: formatDate(repository.updated_at)
   }
-
-  function getLanguageURL() {
-    const url = repository.languages_url;
-    
-    if(url) {
-      fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        const string = JSON.stringify(data);
-        const languages = formatJSON(string);
-        setLanguages(languages);
-        setLoading(false);
-      });
-    }
-  }
-
-  function getRepositoryData() {
-    fetch(`https://api.github.com/repos/pattonhoffiman/${props.name}`)
+  
+  useEffect(() => {    
+    setLoading(true);
+    fetch(`https://api.github.com/repos/pattonhoffiman/${props.repository.name}`)
     .then(res => res.json())
     .then(data => {setRepository(data)});
-  }
-  
-  useEffect(() => {
-    setLoading(true);
-    getRepositoryData();
-    getLanguageURL();        
-  }, [props.name]);
+
+    fetch(props.repository.languages_url)
+    .then(res => res.json())
+    .then(data => {
+      const string = JSON.stringify(data);
+      const languages = formatJSON(string);
+      setLanguages(languages);
+      setLoading(false);
+    });
+    
+  }, [props.repository.name]);
 
   return (
     <div className="repository-container-wrapper">

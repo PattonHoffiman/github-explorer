@@ -15,7 +15,7 @@ export default function RepositoryList(props) {
   }, []);
 
   function getRepositoryData(repository) {
-    props.getRepositoryName(repository);
+    props.getRepository(repository);
   }
   
   return (
@@ -27,8 +27,9 @@ export default function RepositoryList(props) {
             {repositories.map(repository =>
               <RepositoryItem
                 key={repository.id}
-                repository={repository.name}
                 buttonAction={getRepositoryData}
+                repositoryName={repository.name}
+                repositoryLanguages={repository.languages_url}
               />
             )}
           </ul>

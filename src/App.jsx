@@ -4,16 +4,16 @@ import RepositoryList from './components/RepositoryList';
 import RepositoryContainer from './components/RepositoryContainer';
 
 export function App() {  
-  const [repository, setRepository] = useState('');
+  const [repository, setRepository] = useState({});
 
-  function getRepositoryName(name) {    
-    setRepository(name);    
+  function getRepositoryData(data) {
+    setRepository(data);
   }
 
   return (
     <main>
-      <RepositoryList getRepositoryName={getRepositoryName}/>
-      <RepositoryContainer name={repository}/>
+      <RepositoryList getRepository={getRepositoryData}/>
+      <RepositoryContainer repository={repository}/>
     </main>
   );
 }
