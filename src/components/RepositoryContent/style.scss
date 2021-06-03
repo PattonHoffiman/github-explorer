@@ -1,20 +1,127 @@
-section {
-  width: 65%;
-  height: 100%;
-  color: #fafafa;
+@keyframes MoveToDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2%);
+  } to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
 
-  h1 {    
-    font-weight: 500;
-    font-size: 2.5rem;
-    text-align: center;
+section.repository-content {
+  width: 100%;
+  margin-top: -6rem;
+  background: linear-gradient(180.11deg, #03658C 0.09%, #033859 99.91%);
+
+  div {
+    &.animate {
+      animation: MoveToDown 1s ease-out forwards;
+    }
+
+    h1 {
+      color: #50ABBF;
+      font-size: 4rem;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+    }
+
+    p {    
+      font-weight: 300;
+      font-size: 1.5rem;
+      line-height: 28px;
+      margin: auto 3rem;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    div.secondary-info {
+      display: flex;
+      justify-content: space-between;
+      
+      margin: auto 4rem;
+
+      a {
+        opacity: .5;
+        color: #50ABBF;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 28px;      
+        text-decoration: none;
+        font-family: 'Roboto Condensed', sans-serif;
     
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+        transition: .3s;
+    
+        &:hover {
+          opacity: 1;
+        }
+      }
 
-  p {    
-    padding: 1rem;
-    font-weight: 300;
-    font-size: 1.5rem;
-  }
+      div.date-container {
+        display: flex;
+        align-items: left;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+          color: #50ABBF;
+          cursor: default;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 21px;
+        }
+      }
+    }
+    }
+
+    div.languages-container {
+      display: flex;
+      margin-top: 1rem;
+      margin-bottom: 1rem;    
+      
+      div.indicator {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+
+        margin-left: 4rem;
+        
+        span {
+          cursor: default;
+          font-weight: 500;
+          font-size: 1.5rem;
+        }
+
+        svg {
+          width: 40px;
+          height: 40px;
+          stroke: #50ABBF;
+          stroke-width: 2;
+          fill: transparent;
+        }
+      }
+
+      div.language {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        width: 120px;
+        padding: .8rem;
+        margin-right: .5rem;
+        
+        cursor: default;
+
+        font-weight: 500;
+        font-family: 'Roboto Mono', monospace;
+        
+        color: #021526;
+        border-radius: 20px;
+        background: #f2f2f2;
+
+        &:last-child {
+          margin-right: 4rem;        
+        }
+      }
+    }
 }

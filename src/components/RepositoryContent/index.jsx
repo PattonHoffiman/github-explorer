@@ -1,40 +1,56 @@
 import './style.scss';
-import { useState, useEffect } from 'react';
-import { DateContainer } from '../DateContainer';
-import formatJSON from '../../utils/format/formatJSON';
+import { FiChevronRight } from 'react-icons/fi';
+import formatRepositoryName from '../../utils/format/formatRepositoryName';
 
-export function RepositoryContent(props) {
-  const repository = props.injectData();
-  
-  const dates = {
-    created_at: repository.created_at,
-    updated_at: repository.updated_at
-  }
-
-  const [techs, setTechs] = useState([]);
-  
-  function getLanguageURL() {
-    const url = repository.languages_url;
-    
-    if(url) {
-      fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        const languages = formatJSON(JSON.stringify(data));
-        setTechs(languages);
-      });
-    }
-  }
-  
-  useEffect(() => {
-    getLanguageURL();
-  }, [repository.name]);
+export default function RepositoryContent(props) {
+  const link = props.link;
+  const dates = props.dates;
+  const loading = props.loading;
+  const languages = props.languages;
+  const description = props.description;
+  const name = formatRepositoryName(props.name);  
 
   return (
-    <section>
-      <h1>{repository.name}</h1>
-      <p>{repository.description}</p>
-      {repository.created_at && <DateContainer dates={dates}/>}      
+    <section className="repository-content">        
+      {loading ? (<></>) : (
+          <div className={!loading ? 'animate': ''}>
+          <h1>{name}</h1>
+          <p>{description}</p>
+          <div className="secondary-info">
+            {link &&
+              <a
+              href={link}
+              target="_blank"
+              >
+                Access Repository
+              </a>
+            }
+            {dates.created_at &&
+              <div className="date-container">
+                <span>Created - {dates.created_at}</span>
+                <span>Updated - {dates.updated_at}</span>
+              </div>
+            }
+          </div>
+          <div className="languages-container">        
+            {languages[0] &&
+              <div className="indicator">
+                <span>Techs</span>
+                <FiChevronRight />
+              </div>
+            }
+            {languages.map(language =>
+              <div
+                key={language}
+                className="language"
+              >
+                {language}
+              </div>
+            )}
+          </div>
+        </div>
+        )
+      }
     </section>
-  );
+  );  
 }
