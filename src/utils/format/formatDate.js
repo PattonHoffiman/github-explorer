@@ -1,7 +1,13 @@
 export default function formatDate(string) {
   if(string) {
-    const date = string.substring(0,10);
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
+    return organizeDate(
+      separateByType(
+        getOnlyDate(string)
+      )
+    );
   }
 }
+
+const separateByType = (string) => string.split('-');
+const getOnlyDate = (string) => string.substring(0,10);
+const organizeDate = (date) => `${date[2]}/${date[1]}/${date[0]}`;

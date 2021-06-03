@@ -13,7 +13,7 @@ export default function formatJSON(string) {
 }
 
 const splitByComma = (string) => string.split(",");
-var removeDoubleDots = (string) => string.replaceAll(":", "");
+const removeDoubleDots = (string) => string.replaceAll(":", "");
 const removeNumbers = (string) => string.replaceAll(/[0-9]/g, "");
 const removeDoubleComma = (string) => string.replaceAll(/"/g, "");
 const removeKeys = (string) => string.replace("{", "").replace("}", "");
