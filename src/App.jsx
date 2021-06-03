@@ -1,23 +1,19 @@
 import './styles/global.scss';
 import { useState } from 'react';
-import { RepositoryList } from './components/RepositoryList';
-import { RepositoryContent } from './components/RepositoryContent';
+import RepositoryList from './components/RepositoryList';
+import RepositoryContainer from './components/RepositoryContainer';
 
-export function App() {
-  const [data, setData] = useState({});
+export function App() {  
+  const [repository, setRepository] = useState('');
 
-  function getData(data) {    
-    setData(data);    
-  }
-
-  function injectData() {    
-    return data;
+  function getRepositoryName(name) {    
+    setRepository(name);    
   }
 
   return (
     <main>
-      <RepositoryList getData={getData}/>
-      <RepositoryContent injectData={injectData} />
+      <RepositoryList getRepositoryName={getRepositoryName}/>
+      <RepositoryContainer name={repository}/>
     </main>
   );
 }
