@@ -41,19 +41,30 @@ section.repository-content {
       
       margin: auto 4rem;
 
-      a {
-        opacity: .5;
-        color: #50ABBF;
-        font-weight: 400;
-        font-size: 1.5rem;
-        line-height: 28px;      
-        text-decoration: none;
-        font-family: 'Roboto Condensed', sans-serif;
-    
-        transition: .3s;
-    
-        &:hover {
-          opacity: 1;
+      div.link-container {
+        display: flex;
+        align-items: left;
+        flex-direction: column;
+        justify-content: center;
+        
+        a {
+          opacity: .5;
+          color: #50ABBF;
+          font-weight: 400;
+          font-size: 1.5rem;
+          line-height: 28px;      
+          text-decoration: none;
+          font-family: 'Roboto Condensed', sans-serif;
+      
+          transition: .3s;
+      
+          &:hover {
+            opacity: 1;
+          }
+
+          & + a {
+            margin-bottom: .25rem;
+          }
         }
       }
 

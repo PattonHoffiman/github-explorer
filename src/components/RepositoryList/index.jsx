@@ -8,10 +8,7 @@ export default function RepositoryList(props) {
   useEffect(() => {
     fetch(`https://api.github.com/users/pattonhoffiman/repos`)
     .then(res => res.json())
-    .then(data => {
-      setRepositories(data);
-      console.log(data);
-    });
+    .then(data => setRepositories(data));
   }, []);
 
   function getRepositoryData(repository) {
