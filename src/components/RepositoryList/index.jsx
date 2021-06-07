@@ -29,7 +29,7 @@ export default function RepositoryList(props) {
                 repositoryLanguages={repository.languages_url}
               />
             )}
-          </ul>
+          </ul>          
         </div>
       }
     </aside>

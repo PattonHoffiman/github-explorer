@@ -16,4 +16,8 @@ section.user-container {
     animation: MoveUser 1s ease-out forwards;
     animation-delay: .1s;
   }
+
+  div.button-area {
+    display: none;
+  }
 }
