@@ -22,14 +22,16 @@ export default function RepositoryList(props) {
           <h2>Repositories</h2>
           <ul>
             {repositories.map(repository =>
-              <RepositoryItem
-                key={repository.id}
-                buttonAction={getRepositoryData}
-                repositoryName={repository.name}
-                repositoryLanguages={repository.languages_url}
-              />
+              <li>
+                <RepositoryItem
+                  key={repository.id}
+                  buttonAction={getRepositoryData}
+                  repositoryName={repository.name}
+                  repositoryLanguages={repository.languages_url}
+                />
+              </li>
             )}
-          </ul>          
+          </ul>
         </div>
       }
     </aside>

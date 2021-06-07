@@ -29,7 +29,7 @@ div.init-animation {
     font-size: 2rem;
 
     opacity: .7;
-    color: #021526;
+    color: #F2F2F2;
     background: #50ABBF;
     box-shadow: 2px 2px 2px rgba(0,0,0,.5);
     
@@ -48,8 +48,7 @@ div.init-animation {
     }
 
     &:hover {
-      opacity: 1;
-      color: #F2F2F2;
+      opacity: 1;      
       animation: Move 1s ease-out forwards;
     }
   }
