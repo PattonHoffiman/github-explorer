@@ -3,17 +3,23 @@ import { useState } from 'react';
 import RepositoryList from './components/RepositoryList';
 import RepositoryContainer from './components/RepositoryContainer';
 
-export function App() {  
-  const [repository, setRepository] = useState({});
+export interface IRepository {
+  id: number;
+  name: string;
+  languages_url: string;
+}
 
-  function getRepositoryData(data) {
+export function App() {  
+  const [repository, setRepository] = useState({} as IRepository);
+
+  function getRepositoryData(data: IRepository) {
     setRepository(data);
   }
 
   return (
     <main>
       <RepositoryList getRepository={getRepositoryData}/>
-      <RepositoryContainer repository={repository}/>
+      <RepositoryContainer {...repository} />
     </main>
   );
 }

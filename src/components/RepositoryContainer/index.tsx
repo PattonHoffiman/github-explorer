@@ -1,22 +1,26 @@
 import './style.scss';
 import { useState, useEffect } from 'react';
 
+import { IRepository } from '../../App';
 import UserContainer from '../UserContainer';
 import RepositoryContent from '../RepositoryContent';
-import formatDate from '../../utils/format/formatDate';
 import formatJSON from '../../utils/format/formatJSON';
 
-export default function RepositoryContainer(props) {
+export interface IRepositoryData {
+  name: string;
+  html_url: string;
+  homepage: string;
+  created_at: string;
+  updated_at: string;
+  description: string;
+}
+
+export default function RepositoryContainer(props: IRepository) {
   const width = window.innerWidth;
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [languages, setLanguages] = useState([]);
-  const [repository, setRepository] = useState({});
-
-  const dates = {
-    created_at: formatDate(repository.created_at),
-    updated_at: formatDate(repository.updated_at)
-  }
+  const [languages, setLanguages] = useState([] as string[]);
+  const [repository, setRepository] = useState({} as IRepositoryData);
   
   function showRepositories() {
     setShow(!show);
@@ -25,23 +29,23 @@ export default function RepositoryContainer(props) {
   useEffect(() => {
     if(width <= 366) showRepositories();
 
-    if(props.repository.name) {
+    if(props.name) {
       setLoading(true);
-      fetch(`https://api.github.com/repos/pattonhoffiman/${props.repository.name}`)
+      fetch(`https://api.github.com/repos/pattonhoffiman/${props.name}`)
       .then(res => res.json())
       .then(data => {
         setRepository(data);
-        fetch(props.repository.languages_url)
+        fetch(props.languages_url)
         .then(res => res.json())
         .then(data => {
           const string = JSON.stringify(data);
           const languages = formatJSON(string);
-          setLanguages(languages);          
+          setLanguages(languages);
           setLoading(false);
         });
       });
     }    
-  }, [props.repository.name]);
+  }, [props.name]);
 
   return (          
     <div
@@ -50,14 +54,10 @@ export default function RepositoryContainer(props) {
       <UserContainer
         showRepositories={showRepositories}
       />
-      <RepositoryContent
-        dates={dates}
-        loading={loading}
+      <RepositoryContent        
+        loading={loading}     
         languages={languages}
-        name={repository.name}
-        linkRepo={repository.html_url}
-        linkSite={repository.homepage}
-        description={repository.description}
+        repository={repository}
       />
     </div>
   );

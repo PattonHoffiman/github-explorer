@@ -1,10 +1,12 @@
 import './style.scss';
 import { FiBriefcase, FiMapPin } from 'react-icons/fi';
 
-export default function CompanyLocation(props) {
-  const company = props.company;
-  const location = props.location;
+interface ICompanyLocation {
+  company: string;
+  location: string;
+}
 
+export default function CompanyLocation({ company, location } : ICompanyLocation) {
   return (
     <div className="company-location">
       {company &&

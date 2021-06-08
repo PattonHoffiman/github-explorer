@@ -1,35 +1,43 @@
 import './style.scss';
 import { FiChevronRight } from 'react-icons/fi';
+import { IRepositoryData } from '../RepositoryContainer';
+
+import formatDate from '../../utils/format/formatDate';
 import formatRepositoryName from '../../utils/format/formatRepositoryName';
 
-export default function RepositoryContent(props) {
-  const dates = props.dates;
-  const repo = props.linkRepo;
-  const site = props.linkSite;
-  const loading = props.loading;
-  const languages = props.languages;
-  const description = props.description;
-  const name = formatRepositoryName(props.name);  
+interface IRepositoryContent {
+  loading: boolean;
+  languages: string[];
+  repository: IRepositoryData;
+}
+
+export default function RepositoryContent({repository, loading, languages} : IRepositoryContent) {    
+  const name = formatRepositoryName(repository.name);
+
+  const dates = {
+    created_at: formatDate(repository.created_at),
+    updated_at: formatDate(repository.updated_at)
+  }
 
   return (
     <section className="repository-content">
       {loading ? (<></>) : (
           <div className={!loading ? 'animate': ''}>
           <h1>{name}</h1>
-          <p>{description}</p>
+          <p>{repository.description}</p>
           <div className="secondary-info">
             <div className="link-container">
-              {site &&
+              {repository.homepage &&
                 <a
-                  href={site}
+                  href={repository.homepage}
                   target="_blank"
                 >
                   Access Site
                 </a>
               }
-              {repo &&
+              {repository.html_url &&
                 <a
-                  href={repo}
+                  href={repository.html_url}
                   target="_blank"
                 >
                   Access Repository
@@ -44,12 +52,10 @@ export default function RepositoryContent(props) {
             }
           </div>
           <div className="languages-container">
-            {languages[0] &&
-              <div className="indicator">
-                <span>Techs</span>
-                <FiChevronRight />
-              </div>
-            }
+            <div className="indicator">
+              <span>Techs</span>
+              <FiChevronRight />
+            </div>
             {languages.map(language =>
               <div
                 key={language}

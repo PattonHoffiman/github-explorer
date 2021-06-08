@@ -1,10 +1,12 @@
 import './style.scss';
 
-export default function UserContent(props) {
-  const bio = props.bio;
-  const name = props.name;
-  const avatar = props.avatar_url;
-  
+interface IUserContent {
+  bio: string;
+  name: string;
+  avatar: string;
+}
+
+export default function UserContent({bio, name, avatar} : IUserContent) {  
   return (
     <div className="user-content">
       <div className="avatar">

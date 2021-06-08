@@ -4,17 +4,21 @@ import { useState, useEffect } from 'react';
 import UserContent from './UserContent';
 import CompanyLocation from './CompanyLocation';
 
-export default function UserContainer(props) {  
-  const [user, setUser] = useState({});
-  const [load, setLoad] = useState(true);
+interface IUser {
+  bio: string;
+  name: string;
+  company: string;
+  location: string;
+  avatar_url: string;
+}
 
-  const userInfo = {
-    bio: user.bio,
-    name: user.name,
-    company: user.company,
-    location: user.location,
-    avatar_url: user.avatar_url
-  }
+interface IUserContainer {
+  showRepositories(): void;
+}
+
+export default function UserContainer(props: IUserContainer) {
+  const [load, setLoad] = useState(true);
+  const [user, setUser] = useState({} as IUser);
 
   useEffect(() => {
     setLoad(true)
@@ -32,13 +36,13 @@ export default function UserContainer(props) {
           <>
             <div>
               <UserContent
-                bio={userInfo.bio}
-                name={userInfo.name}
-                avatar_url={userInfo.avatar_url}
+                bio={user.bio}
+                name={user.name}
+                avatar={user.avatar_url}
               />
               <CompanyLocation
-                company={userInfo.company}
-                location={userInfo.location}
+                company={user.company}
+                location={user.location}
               />
             </div>
             <div className="button-area">
