@@ -18,7 +18,7 @@ export interface IRepositoryData {
 export default function RepositoryContainer(props: IRepository) {
   const width = window.innerWidth;
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [load, setLoad] = useState(true);
   const [languages, setLanguages] = useState([] as string[]);
   const [repository, setRepository] = useState({} as IRepositoryData);
   
@@ -30,7 +30,7 @@ export default function RepositoryContainer(props: IRepository) {
     if(width <= 366) showRepositories();
 
     if(props.name) {
-      setLoading(true);
+      setLoad(true);
       fetch(`https://api.github.com/repos/pattonhoffiman/${props.name}`)
       .then(res => res.json())
       .then(data => {
@@ -41,7 +41,7 @@ export default function RepositoryContainer(props: IRepository) {
           const string = JSON.stringify(data);
           const languages = formatJSON(string);
           setLanguages(languages);
-          setLoading(false);
+          setLoad(false);
         });
       });
     }    
@@ -55,7 +55,7 @@ export default function RepositoryContainer(props: IRepository) {
         showRepositories={showRepositories}
       />
       <RepositoryContent        
-        loading={loading}     
+        load={load}
         languages={languages}
         repository={repository}
       />

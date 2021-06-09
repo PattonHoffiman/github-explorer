@@ -6,12 +6,12 @@ import formatDate from '../../utils/format/formatDate';
 import formatRepositoryName from '../../utils/format/formatRepositoryName';
 
 interface IRepositoryContent {
-  loading: boolean;
+  load: boolean;
   languages: string[];
   repository: IRepositoryData;
 }
 
-export default function RepositoryContent({repository, loading, languages} : IRepositoryContent) {    
+export default function RepositoryContent({repository, load, languages} : IRepositoryContent) {    
   const name = formatRepositoryName(repository.name);
 
   const dates = {
@@ -21,8 +21,8 @@ export default function RepositoryContent({repository, loading, languages} : IRe
 
   return (
     <section className="repository-content">
-      {loading ? (<></>) : (
-          <div className={!loading ? 'animate': ''}>
+      {load ? (<></>) : (
+          <div className={!load ? 'animate': ''}>
           <h1>{name}</h1>
           <p>{repository.description}</p>
           <div className="secondary-info">
@@ -69,5 +69,5 @@ export default function RepositoryContent({repository, loading, languages} : IRe
         )
       }
     </section>
-  );  
+  );
 }
